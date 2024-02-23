@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:css='false' b:defaultwidgetversion='2' b:layoutsVersion='3' b:responsive='true' b:templateUrl='indie.xml' b:templateVersion='1.3.3' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<!-- Blank template for blogger- shared by Owinile Njalo (https://blogspot.owinile.com) -->
+<head>
+    <b:include data='blog' name='all-head-content'/>
+    <title><data:blog.pageTitle/></title>
+    <b:skin><![CDATA[
+         
+    ]]></b:skin>
+  </head>
+
+  <body>
+    <b:section id='Header' showaddelement='yes'/> 
+	<!-- Posts -->
+<b:section id='Blog'>
+  <b:widget id='Blog1' locked='true' title='Blog Posts' type='Blog' version='2' visible='true'>
+     <b:includable id='main'>
+    <!-- Basic structure of example. You can delete from here {{ -->
+    <b:if cond='data:view.isMultipleItems'>
+	<!-- SI ES UNA BUSQUEDA POR PALABRA O POR ETIQUETA -->
+<b:if cond='data:view.search.query or data:view.search.label'>
+<!-- SI NO EXISTE EL TERMINO DE BUSQUEDA O ETIQUETA -->
+   <b:if cond='data:posts.size == 0'>
+            <b:if cond='data:view.search.query'>
+                     <h3>Lo sentimos :(</h3>
+                     <p>No hay entradas con esos términos de búsqueda. </p>
+               <b:else/>
+                     <h3>Lo sentimos :(</h3>
+                     <p>Este blog aún no tiene entradas con esa etiqueta.</p>
+            </b:if>
+<!-- CASO CONTARIO SI EXISTE EL TERMINO DE BUSQUEDA O ETIQUETA -->
+      <b:else/>
+     <b:if cond='data:view.isSearch'/>
+	</b:if>
+</b:if>
+	<!-- ESTO ES PAGINA PRINCIPAL DEL BLOG -->
+      <b:loop values='data:posts' var='post'>
+         <b:include data='post' name='post'/><!-- Include posts -->
+      </b:loop>
+      <b:include name='postPagination'/><!-- Include pagination -->
+    <!-- CASO CONTARIOS ES UNA ENTRADA -->
+<b:elseif cond='data:view.isPost'/>
+      <b:loop values='data:posts' var='post'>
+         <b:include data='post' name='post'/><!-- Include posts -->
+         <b:include data='post' name='comments'/><!-- Include comments -->
+      </b:loop>
+	 <!-- CASO CONTARIOS ES UNA PAGINA ESTATICA -->
+   <b:elseif cond='data:view.isPage'/>
+   <b:loop values='data:posts' var='post'>
+                  <b:include data='post' name='post'/>  <!-- Include posts -->                 
+                  <b:include data='post' name='comments'/> <!-- Include comments -->
+   </b:loop>  
+    </b:if>
+    <!-- }} Up to this point -->
+
+    </b:includable>
+	 <b:includable id='post' var='post'>
+    
+      <b:if cond='data:view.isMultipleItems'>
+	  
+	  <b:if cond='!data:view.isSearch'>
+ 
+       <!--{{ Muestra el index }}-->
+ 
+       <b:else/>
+ 
+       <!--{{ Muestra el blog busqueda }}-->
+ 
+       </b:if>     
+
+      <b:elseif cond='data:view.isPost'/>
+
+      <!--{{ Muestra el Posts }}-->
+
+      <b:elseif cond='data:view.isPage'/>
+
+      <!--{{ Muestra la pagina estatica }}-->
+   
+      </b:if>
+
+    </b:includable>
+	  </b:widget>
+</b:section>
+<b:section id='Footer' showaddelement='yes'/> 
+
+  </body>
+</html>
